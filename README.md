@@ -1,8 +1,8 @@
 ## my nixos config
 
-![img](img/image.jpg) 
 
-<img src="https://raw.githubusercontent.com/chuch3/nixos/main/img/image.jpg" style="width:75%; height:auto;">
+<img src="https://github.com/chuch3/nixos/raw/main/img/image.jpg" style="width:75%; height:auto;">
+
 
 still a beginner nixos config, may hop from endeavouros
 
