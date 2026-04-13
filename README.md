@@ -1,16 +1,28 @@
+## my nixos config
+
+<img src="https://raw.githubusercontent.com/chuch3/nixos/main/img/image.jpg" style="width:75%; height:auto;">
+
+still a beginner nixos config, may hop from endeavouros
+
+main nixos reference structure and motif : [link](https://github.com/breitnw/nixos)
+
+### Todo:
+
+> Use `sudo nixos-rebuild switch`to apply the modded configration after editing 
+> 
+> Add `--show-trace --print-build-logs --verbose` for detailed error messages
+
+- [ ] Keybind setup
+- [ ] Git rollback nixos-config setup
+- [ ] Test custom config in nixos installation
+- [ ] Setup secret management with sops-nix
+
+### Reference: 
+
 - [https://nix.dev/tutorials/nix-languageEntire NixOS & Flake Manual](https://nixos-and-flakes.thiscute.world/)
 - [nix](https://nix.dev/tutorials/nix-language)
 - [reference repo](https://gist.github.com/mpickering/a3be96e06105e58355b5659dffb8c47e)
 
-
-
-Use `nixos-generate-config` to generate hardware configuration 
-
-Use `sudo nixos-rebuild switch`to apply the modded configration after editing 
-    - Add `--show-trace --print-build-logs --verbose` for detailed error messages
-
-
-- [ ] Setup secret management with sops-nix
 
 
 
