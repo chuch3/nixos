@@ -6,7 +6,7 @@
 
 still a beginner nixos config, may hop from endeavouros
 
-main nixos reference structure and motif : [link](https://github.com/breitnw/nixos)
+main reference and motif by [breitnw/nixos](https://github.com/breitnw/nixos) and [the goat izmi](https://x.com/izm_ni)
 
 ### Todo:
 
