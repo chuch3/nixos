@@ -14,6 +14,7 @@
 
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
     syntaxHighlighting.enable = true;
     # initContent = lib.mkOrder 1500 ''
     #   if [[ $TERM == "alacritty" ]]; then

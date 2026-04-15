@@ -1,9 +1,10 @@
-{config, ...}:
-# MODULE ROOT AND UNIVERSAL CONFIGURATION
-{
+{config, ...}: {
   imports = [
     ./programs
+    ./services
     ./desktops
+    ./themes
+    ./keybinds
   ];
 
   config = {
@@ -14,9 +15,6 @@
       };
     };
 
-    # Set the default editor to vim
-    environment.variables.EDITOR = "nvim";
-
     # enable home-manager (needs bootstrap)
     programs.home-manager.enable = true;
 
@@ -25,5 +23,15 @@
 
     # default applications
     xdg.mimeApps.enable = true;
+
+    home.sessionVariables = {
+      # config directory for nh
+      NH_FLAKE = "${config.home.homeDirectory}/Config/nixos";
+
+      # TODO: Change default graphical and TUI editor with nvim?
+
+      # VISUAL = "${config.programs.emacs.package}/bin/emacsclient";
+      # EDITOR = "${config.programs.emacs.package}/bin.emacsclient -nw";
+    };
   };
 }
