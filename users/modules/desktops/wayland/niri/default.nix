@@ -38,7 +38,7 @@
           natural-scroll = false;
           tap = false;
         };
-        # TODO map over all displays 
+        # TODO map over all displays
         outputs."eDP-1" = {
           # mode = "2560x1600@60";
           scale = config.platform.display-management.displays."eDP-1".scale.wayland;

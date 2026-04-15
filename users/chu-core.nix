@@ -93,9 +93,9 @@
 
   # desktop environments (see desktops/default.nix)
   modules.desktops = {
-    primary_display_server = "xorg";
-    wayland.enable = false;
-    xorg.enable = true;
+    primary_display_server = "wayland";
+    wayland.enable = true;
+    xorg.enable = false;
   };
 
   # global theme

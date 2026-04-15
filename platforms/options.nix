@@ -8,42 +8,17 @@
           "aarch64-linux"
         ];
       };
-      display-management = {
-        displays = lib.mkOption {
-          description = "The displays available for this system";
-          type = lib.types.attrsOf (lib.types.submodule {
-            options = {
-              pixel-size.width = lib.mkOption {
-                type = lib.types.int;
-                description = "the width of this display in physical (not logical) pixels";
-              };
-              pixel-size.height = lib.mkOption {
-                type = lib.types.int;
-                description = "the height of this display in physical (not logical) pixels";
-              };
-              scale.xorg = lib.mkOption {
-                type = lib.types.float;
-                description = "the scale of this display on x.org systems";
-              };
-              scale.wayland = lib.mkOption {
-                type = lib.types.float;
-                description = "the scale of this display on wayland systems";
-              };
-            };
-          });
-        };
-        profiles = lib.mkOption {
-          description = "The display profiles available for this system (e.g., for autorandr)";
-          type = lib.types.attrsOf (lib.types.attrsOf (lib.types.submodule {
-            options = {
-              position = lib.mkOption {
-                description = "the position of this display in logical pixels";
-                example = "1366x0";
-              };
-              primary = lib.mkEnableOption "whether this is the primary display in the profile";
-            };
-          }));
-        };
+      available-features = {
+        vsync =
+          lib.mkEnableOption
+          "Whether vertical synchronization in X.Org is supported";
+        gamma-ramp =
+          lib.mkEnableOption
+          "Whether gamma shifting is supported (e.g., redshift, gammastep)";
+        dp-alt-mode = lib.mkEnableOption ''
+          Whether DisplayPort Alt Mode is supported. If it is not, the system
+          configuration should enable DisplayLink.
+        '';
       };
     };
   };

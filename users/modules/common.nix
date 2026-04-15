@@ -30,8 +30,8 @@
 
       # TODO: Change default graphical and TUI editor with nvim?
 
-      # VISUAL = "${config.programs.emacs.package}/bin/emacsclient";
-      # EDITOR = "${config.programs.emacs.package}/bin.emacsclient -nw";
+      VISUAL = "${config.programs.emacs.package}/bin/emacsclient";
+      EDITOR = "${config.programs.emacs.package}/bin.emacsclient -nw";
     };
   };
 }

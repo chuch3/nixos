@@ -1,29 +1,57 @@
-{config, ...}:
-# MODULE ROOT AND UNIVERSAL CONFIGURATION
 {
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}: {
   imports = [
-    ./programs
+    ./output
     ./desktops
   ];
 
-  config = {
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-        allowUnfreePredicate = _: true;
-      };
+  powerManagement.enable = true;
+
+  hardware.graphics.enable = true;
+  hardware.graphics.package = pkgs.mesa;
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = false;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+  # Set your time zone.
+  time.timeZone = "Asia/Kuala_Lumpur";
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  nix = {
+    # Enable flakes
+    settings.experimental-features = ["nix-command" "flakes"];
+    # Enable automatic garbage collection
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
     };
+    # Enable automatic optimization
+    optimise.automatic = true;
+    # ensure that nixpkgs path aligns with nixpkgs flake input
+    nixPath = ["nixpkgs=${inputs.nixpkgs}:nixpkgs-unstable=${inputs.nixpkgs-unstable}"];
+  };
 
-    # Set the default editor to vim
-    environment.variables.EDITOR = "nvim";
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    settings = {PasswordAuthentication = false;};
+  };
 
-    # enable home-manager (needs bootstrap)
-    programs.home-manager.enable = true;
-
-    # reload systemd units on home-manager switch
-    systemd.user.startServices = "sd-switch";
-
-    # default applications
-    xdg.mimeApps.enable = true;
+  # Open ports in the firewall
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [57110];
   };
 }
