@@ -14,6 +14,7 @@
   # Desktop support
   modules.desktops.xorg.enable = true;
   modules.desktops.wayland.enable = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure users
   users.users.chu = {

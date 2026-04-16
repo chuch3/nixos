@@ -140,8 +140,7 @@
       inputs.nixpkgs.lib.mapAttrs' (system-name: cfg: {
         name = "chu@${system-name}";
         value = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = inputs.nixpkgs.legacyPackages
-          .${(import cfg.platform).platform.type};
+          pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {inherit system-name inputs;};
           modules = [
             ({...}: {
