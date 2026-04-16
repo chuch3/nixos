@@ -1,3 +1,3 @@
 {...}: {
-  imports = [./music];
+  imports = [./music ./calendar.nix];
 }

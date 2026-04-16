@@ -79,13 +79,13 @@
       # search engines
       programs.firefox.profiles.default.search = {
         force = true;
-        default = "google";
+        default = "kagi";
         engines = {
           kagi = {
-            name = "google";
+            name = "Kagi";
             urls = [
               {
-                template = "https://google.com/search?";
+                template = "https://kagi.com/search?";
                 params = [
                   {
                     name = "q";
@@ -185,15 +185,49 @@
         # Check about:support for extension/add-on ID strings.
         # Valid strings for installation_mode are "allowed", "blocked",
         # "force_installed" and "normal_installed".
-        # TODO : Add extensions like ublock origin, dark reader and vimium
         ExtensionSettings = {
+          "*".installation_mode = "blocked"; # blocks all addons except the ones specified below
+          # LeechBlock NG
+          "leechblockng@proginosko.com" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/leechblock-ng/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # AdNauseam
+          "adnauseam@rednoise.org" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/adnauseam/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # BrowserPass
+          "browserpass@maximbaz.com" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/browserpass-ce/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # Dynamic Base16
+          "dynamic_base16@gnrl_leclerc.org" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/dynamic-base16/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # Kagi Search
+          "search@kagi.com" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/kagi-search-for-firefox/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # Old Twitter Layout
+          "oldtwitter@dimden.dev-reupload" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/old-twitter-layout-2024/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # Old Reddit Redirect
+          "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/old-reddit-redirect/latest.xpi";
+            installation_mode = "force_installed";
+          };
         };
 
         /*
         ---- PREFERENCES ----
         */
         # Check about:config for options.
-        # TODO: Adjust firefox settings
         Preferences = {
           # defaults
           "browser.contentblocking.category" = lock "strict";

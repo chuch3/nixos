@@ -5,32 +5,17 @@
   ...
 }: {
   # Networking
-  networking.hostName = "core";
+  networking.hostName = "chu";
   networking.networkmanager.enable = true;
+
+  # VPN configuration
+  modules.mullvad.enable = true;
 
   # Desktop support
   modules.desktops.xorg.enable = true;
+  modules.desktops.wayland.enable = true;
 
-  users.mutableUsers = false;
-
-  # Limit list of versions during boot
-  boot.loader.systemd-boot.configurationLimit = 10;
-
-  # Perform garbage collection weekly to maintain low disk usage
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  # Optimize storage
-  # You can also manually optimize the store via:
-  #    nix-store --optimise
-  # Refer to the following link for more details:
-  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
-
-  nix.settings.auto-optimise-store = true;
-
+  # Configure users
   users.users.chu = {
     isNormalUser = true;
     extraGroups = [
@@ -52,9 +37,23 @@
   #  run as root, or for system recovery in an emergency. All other packages
   #  should be configured via home-manager on a per-user basis
   environment.systemPackages = with pkgs; [
+    git
     vim
     wget
   ];
+
+  # This has to go here for some reason
+  programs.ladybird.enable = true;
+
+  # required udev rules for platformio
+  services.udev.packages = [pkgs.platformio-core.udev pkgs.openocd];
+
+  # virtualization
+  virtualisation.docker.enable = true;
+  # enable x86 emulation if we're on an aarch64 system
+  boot.binfmt.emulatedSystems =
+    lib.mkIf
+    (config.platform.type == "aarch64-linux") ["x86_64-linux"];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

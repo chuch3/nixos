@@ -1,4 +1,7 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  ...
+}: {
   # should this be here?
   programs.zoxide = {
     enable = true;
@@ -14,7 +17,6 @@
 
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
     syntaxHighlighting.enable = true;
     # initContent = lib.mkOrder 1500 ''
     #   if [[ $TERM == "alacritty" ]]; then

@@ -23,7 +23,7 @@ in {
   };
 
   config = {
-    # NOTE: It seems that tuigreet cannot be used as the display manager, at
+    # NOTE It seems that tuigreet cannot be used as the display manager, at
     # least out-of-the-box. NixOS expects the session to be wrapped with
     # services.displayManager.sessionData.wrapper in order to start the fake
     # graphical-session.target, but this is not done in the greetd NixOS module
@@ -60,6 +60,10 @@ in {
         enable = true;
       };
     };
+
+    # services.displayManager.lemurs = {
+    #   enable = true;
+    # };
 
     # ALL DESKTOPS =============================================================
 

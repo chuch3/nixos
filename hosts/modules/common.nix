@@ -1,3 +1,6 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   pkgs,
   inputs,
@@ -6,9 +9,21 @@
   ...
 }: {
   imports = [
+    # Input devices, such as the keyboard and touchbar
+    ./input
+    # Output devices, such as displays and audio devices
     ./output
+    # Desktop environment and display manager
     ./desktops
+    # Kernel stuff, including apple silicon support
+    ./kernel
+    # Services that need to run as root
+    ./services
   ];
+
+  # location service
+  location.provider = "geoclue2";
+  services.geoclue2.enable = true;
 
   powerManagement.enable = true;
 
@@ -24,7 +39,10 @@
   hardware.bluetooth.powerOnBoot = true;
 
   # Set your time zone.
-  time.timeZone = "Asia/Kuala_Lumpur";
+  time.timeZone = "America/Chicago";
+
+  # Select internationalisation properties.
+  console.useXkbConfig = true; # use xkb.options in tty.
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

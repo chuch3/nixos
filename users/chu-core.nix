@@ -1,21 +1,26 @@
 {
-  config,
   pkgs,
+  config,
+  lib,
   ...
 }: {
   # default applications
   xdg.mimeApps = {
     defaultApplicationPackages = with pkgs; [
       # 1: VIEWERS ==================================
-      mupdf # pdf reader
+      mate.atril # pdf reader
       xfce.thunar # file manager
       viewnior # image viewer
       vlc # media player
+      zathura # another (simpler) pdf reader
 
       # 2: EDITORS ==================================
       libreoffice-qt6 # work :(
+      kicad # pcb editor
       krita # paint
+      aseprite # pixel art tool
       gimp # advanced image editing
+      blender # modeling
       picard # music metadata editor
     ];
   };
@@ -29,41 +34,19 @@
     in
       with pkgs;
         [
-          # here is some command line tools I use frequently
-          # feel free to add your own or remove some of them
-
-          zsh
-          neofetch
-          yazi
-
-          # archives
-          zip
-          unzip
-
-          # utils
-          fzf # A command-line fuzzy finder
-
-          # networking tools
-          nmap # A utility for network discovery and security auditing
-
-          # nix related
-          #
-          # it provides the command `nom` works just like `nix`
-          # with more details log output
-          nix-output-monitor
-
-          # productivity
-          hugo # static site generator
-          btop # replacement of htop/nmon
-
-          # system tools
-          usbutils # lsusb
-
           # GUI PROGRAMS ================================
           # Note that file viewers and editors should instead be
           # configured in xdg.mimeApps.defaultApplicationPackages!
+          vesktop # discord client
+          pinentry-qt # password prompt for gpg
           qbittorrent # dw about it
+          nicotine-plus # dw about this one either
           audacious # music player
+          tauon # another music player
+          aseprite # sprite editor
+
+          # strictly system dependent things...
+          (lib.mkIf (system == "x86_64-linux") slack)
 
           # universal tray applets...
           networkmanagerapplet
@@ -76,7 +59,12 @@
           fzf
           ffmpeg
           yt-dlp
+
+          # languages and tools...
           nh # nix helper
+          nixd # nix language server
+          alejandra # nix formatter
+          texliveFull # latex
 
           # FONTS AND OTHER =============================
           etBook
@@ -86,9 +74,18 @@
         ++ config.xdg.mimeApps.defaultApplicationPackages;
   };
 
+  # builtin programs
+  programs.mullvad-vpn.enable = true;
+
   # custom modules
   modules.alacritty.enable = true;
+  modules.mail.enable = true;
   modules.firefox.enable = true;
+  modules.qutebrowser.enable = true;
+  # there shouldn't be two different computers backing up to the same location
+  # TODO only disable syncing for backups, not mounts
+  modules.rclone.enable = false;
+  modules.zotero.enable = false;
   modules.music.enable = false;
 
   # desktop environments (see desktops/default.nix)

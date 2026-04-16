@@ -5,10 +5,8 @@
 {
   environment.systemPackages = with pkgs; [
     pavucontrol # a volume mixer
+    qjackctl # GUI for jackd
   ];
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
+  services.pipewire.jack.enable = true;
 }

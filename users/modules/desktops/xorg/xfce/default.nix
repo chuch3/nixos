@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{pkgs, lib, config, ...}: {
   imports = [
     ./xfconf
     ./autorandr.nix
